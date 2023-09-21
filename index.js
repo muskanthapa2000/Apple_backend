@@ -23,7 +23,7 @@ app.post("/signup", async (req, res) => {
     const isUser = await UserModel.findOne({ email });
   
     if (isUser) {
-      return res.send("This email id is already registered. Please use another one.");
+      return res.status(409).send("This email id is already registered. Please use another one.");
     }
   
     bcrypt.hash(password, 10, async function(err, hash) {
@@ -40,7 +40,7 @@ app.post("/signup", async (req, res) => {
   
       try {
         const data = await newUser.save();
-        res.send(data);
+        res.status(200).send(data);
       } catch (error) {
         console.error("Error while saving user:", error);
         res.status(500).send("Internal server error");
@@ -61,20 +61,40 @@ app.post("/signup", async (req, res) => {
       bcrypt.compare(password, hashed_pwd, function(err, result) {
         if (result) {
           var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
-          res.send({ msg: "Login successful", token: token });
+          res.status(200).send({ msg: "Login successful", token: token });
         } else {
-          res.send({ msg: "Wrong password. Please try again." });
+          res.status(422).send({ msg: "Wrong password. Please try again." });
         }
       });
-    } else {
-      res.send("User not found. Please sign up first.");
+    }
+     else {
+      res.status(409).send("User not found. Please sign up first.");
     }
   });
 
-  app.get("/iphone14" , async (req , res)=>{
-      const data = await iPhone14Model.find();
-      res.send(data);
-  })
+  
+
+  app.get("/iphone14/:id", async (req, res) => {
+    const { id } = req.params; // Use "id" as the parameter name
+    try {
+      const data = await iPhone14Model.findById(id); // Use "id" directly
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send("iPhone14 not found"); // Handle the case when the data is not found
+      }
+    } catch (error) {
+      console.error("Error retrieving iPhone14 data:", error);
+      res.status(500).send("Internal server error"); // Handle other errors
+    }
+  });
+  
+
+
+
+
+
+
 
   app.post("/iphone14add", async (req, res) => {
     const {

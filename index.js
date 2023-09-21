@@ -2,6 +2,7 @@ const {UserModel} = require("./modules/user.module")
 const {connection} = require("./config/db")
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const {iPhone14Model} = require("./modules/Phone14.module") 
 
 const express = require("express");
 const app = express();
@@ -69,6 +70,44 @@ app.post("/signup", async (req, res) => {
       res.send("User not found. Please sign up first.");
     }
   });
+
+  app.get("/iphone14" , async (req , res)=>{
+      const data = await iPhone14Model.find();
+      res.send(data);
+  })
+
+  app.post("/iphone14add", async (req, res) => {
+    const {
+      iPhone14, iPhone14Blue, iPhone14Purple, iPhone14Yellow,
+      iPhone14Black, iPhone14White, iPhone14Red,
+      iPhone14Blue128, iPhone14Purple128, iPhone14Yellow128,
+      iPhone14Black128, iPhone14White128, iPhone14Red128,
+      iPhone14Blue256, iPhone14Purple256, iPhone14Yellow256,
+      iPhone14Black256, iPhone14White256, iPhone14Red256,
+      iPhone14Blue512, iPhone14Purple512, iPhone14Yellow512,
+      iPhone14Black512, iPhone14White512, iPhone14Red512
+    } = req.body;
+  
+    const iphone14Data = {
+      iPhone14, iPhone14Blue, iPhone14Purple, iPhone14Yellow,
+      iPhone14Black, iPhone14White, iPhone14Red,
+      iPhone14Blue128, iPhone14Purple128, iPhone14Yellow128,
+      iPhone14Black128, iPhone14White128, iPhone14Red128,
+      iPhone14Blue256, iPhone14Purple256, iPhone14Yellow256,
+      iPhone14Black256, iPhone14White256, iPhone14Red256,
+      iPhone14Blue512, iPhone14Purple512, iPhone14Yellow512,
+      iPhone14Black512, iPhone14White512, iPhone14Red512
+    };
+  
+    try {
+      const data = await iPhone14Model.create(iphone14Data);
+      res.send(data);
+    } catch (error) {
+      console.error("Error creating iPhone14 record:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+  
   
 
 

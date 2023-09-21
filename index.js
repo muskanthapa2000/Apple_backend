@@ -3,6 +3,7 @@ const {connection} = require("./config/db")
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const {iPhone14Model} = require("./modules/Phone14.module") 
+const {iPhone14PlusModel} = require("./modules/Phone14Plus.module")
 
 const express = require("express");
 const app = express();
@@ -17,7 +18,7 @@ app.get("/" , (req , res)=>{
 })
 
 
-
+// .............................SIGN UP ..................................
 app.post("/signup", async (req, res) => {
     const { email, password, name } = req.body;
     const isUser = await UserModel.findOne({ email });
@@ -48,7 +49,7 @@ app.post("/signup", async (req, res) => {
     });
   });
   
-
+//...........................................LOGIN.....................................................
 
   app.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -72,8 +73,8 @@ app.post("/signup", async (req, res) => {
     }
   });
 
-  
 
+// .......................GET IPHONE 14 .................................
   app.get("/iphone14/:id", async (req, res) => {
     const { id } = req.params; // Use "id" as the parameter name
     try {
@@ -89,12 +90,6 @@ app.post("/signup", async (req, res) => {
     }
   });
   
-
-
-
-
-
-
 
   app.post("/iphone14add", async (req, res) => {
     const {
@@ -128,6 +123,9 @@ app.post("/signup", async (req, res) => {
     }
   });
   
+
+  // ............................ GET IPHONE 14 PLUS ...........................
+
   
 
 

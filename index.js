@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 const {iPhone14Model} = require("./modules/Phone14.module") 
 const {iPhone15Model} = require("./modules/Phone15.module")
 const {iPhone13Model} = require("./modules/Phone13.module")
+const {iPhone11Model} = require("./modules/Phone11.module")
+const {iPhone10Model} = require("./modules/Phone10.module")
 
 const express = require("express");
 const app = express();
@@ -220,6 +222,111 @@ app.post("/signup", async (req, res) => {
   
     try {
       const data = await iPhone13Model.create(iphone13Data);
+      res.send(data);
+    } catch (error) {
+      console.error("Error creating iPhone15 record:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+
+
+  
+  
+  // ............................ GET IPHONE 11  ...........................
+
+  app.get("/iphone11/:id", async (req, res) => {
+    const { id } = req.params; // Use "id" as the parameter name
+    try {
+      const data = await iPhone11Model.findById(id); // Use "id" directly
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send("iPhone11 not found"); // Handle the case when the data is not found
+      }
+    } catch (error) {
+      console.error("Error retrieving iPhone11 data:", error);
+      res.status(500).send("Internal server error"); // Handle other errors
+    }
+  });
+  
+
+  app.post("/iphone11add", async (req, res) => {
+    const {
+      iPhone11, iPhone11Blue, iPhone11Purple, iPhone11Yellow,
+      iPhone11Black, iPhone11White, 
+      iPhone11Blue128, iPhone11Purple128, iPhone11Yellow128,
+      iPhone11Black128, iPhone11White128, 
+      iPhone11Blue256, iPhone11Purple256, iPhone11Yellow256,
+      iPhone11Black256, iPhone11White256, 
+      iPhone11Blue512, iPhone11Purple512, iPhone11Yellow512,
+      iPhone11Black512, iPhone11White512, 
+    } = req.body;
+  
+    const iphone11Data = {
+      iPhone11, iPhone11Blue, iPhone11Purple, iPhone11Yellow,
+      iPhone11Black, iPhone11White, 
+      iPhone11Blue128, iPhone11Purple128, iPhone11Yellow128,
+      iPhone11Black128, iPhone11White128, 
+      iPhone11Blue256, iPhone11Purple256, iPhone11Yellow256,
+      iPhone11Black256, iPhone11White256, 
+      iPhone11Blue512, iPhone11Purple512, iPhone11Yellow512,
+      iPhone11Black512, iPhone11White512, 
+    };
+  
+    try {
+      const data = await iPhone11Model.create(iphone11Data);
+      res.send(data);
+    } catch (error) {
+      console.error("Error creating iPhone15 record:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+
+  // ............................ GET IPHONE 10 ...........................
+
+  app.get("/iphone10/:id", async (req, res) => {
+    const { id } = req.params; // Use "id" as the parameter name
+    try {
+      const data = await iPhone10Model.findById(id); // Use "id" directly
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send("iPhone11 not found"); // Handle the case when the data is not found
+      }
+    } catch (error) {
+      console.error("Error retrieving iPhone11 data:", error);
+      res.status(500).send("Internal server error"); // Handle other errors
+    }
+  });
+  
+
+  app.post("/iphone10add", async (req, res) => {
+    const {
+      iPhone10, iPhone10Blue, iPhone10Purple, iPhone10Yellow,
+      iPhone10Black, iPhone10White, 
+      iPhone10Blue128, iPhone10Purple128, iPhone10Yellow128,
+      iPhone10Black128, iPhone10White128, 
+      iPhone10Blue256, iPhone10Purple256, iPhone10Yellow256,
+      iPhone10Black256, iPhone10White256, 
+      iPhone10Blue512, iPhone10Purple512, iPhone10Yellow512,
+      iPhone10Black512, iPhone10White512, 
+    } = req.body;
+  
+    const iphone10Data = {
+      iPhone10, iPhone10Blue, iPhone10Purple, iPhone10Yellow,
+      iPhone10Black, iPhone10White, 
+      iPhone10Blue128, iPhone10Purple128, iPhone10Yellow128,
+      iPhone10Black128, iPhone10White128, 
+      iPhone10Blue256, iPhone10Purple256, iPhone10Yellow256,
+      iPhone10Black256, iPhone10White256, 
+      iPhone10Blue512, iPhone10Purple512, iPhone10Yellow512,
+      iPhone10Black512, iPhone10White512, 
+    };
+  
+    try {
+      const data = await iPhone10Model.create(iphone10Data);
       res.send(data);
     } catch (error) {
       console.error("Error creating iPhone15 record:", error);

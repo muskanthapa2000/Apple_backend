@@ -23,6 +23,11 @@ const iPhone13Schema = mongoose.Schema({
     iPhone13Yellow512 : {type : String},
     iPhone13Black512 : {type : String},
     iPhone13White512 : {type : String},
+    iPhone13Price : {type : String},
+    iPhone13Price128 : {type : String},
+    iPhone13Price256: {type : String},
+    iPhone13Price512 : {type : String}, 
+    iPhone13Title: {type : String}, 
 })
 
 const iPhone13Model = mongoose.model("iPhone13" , iPhone13Schema)

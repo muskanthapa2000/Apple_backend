@@ -7,6 +7,8 @@ const {iPhone15Model} = require("./modules/Phone15.module")
 const {iPhone13Model} = require("./modules/Phone13.module")
 const {iPhone11Model} = require("./modules/Phone11.module")
 const {iPhone10Model} = require("./modules/Phone10.module")
+const {iPhoneSeModel} = require("./modules/PhoneSe.module")
+const {airPodsModel} = require("./modules/Airpods.module")
 
 const express = require("express");
 const app = express();
@@ -76,6 +78,9 @@ app.post("/signup", async (req, res) => {
     }
   });
 
+  
+  
+
 
 // .......................GET IPHONE 14 .................................
   app.get("/iphone14/:id", async (req, res) => {
@@ -103,7 +108,9 @@ app.post("/signup", async (req, res) => {
       iPhone14Blue256, iPhone14Purple256, iPhone14Yellow256,
       iPhone14Black256, iPhone14White256, iPhone14Red256,
       iPhone14Blue512, iPhone14Purple512, iPhone14Yellow512,
-      iPhone14Black512, iPhone14White512, iPhone14Red512
+      iPhone14Black512, iPhone14White512, iPhone14Red512,
+      iPhone14Price , iPhone14Price128, iPhone14Price256, 
+      iPhone14Price512, iPhone14Title
     } = req.body;
   
     const iphone14Data = {
@@ -114,7 +121,9 @@ app.post("/signup", async (req, res) => {
       iPhone14Blue256, iPhone14Purple256, iPhone14Yellow256,
       iPhone14Black256, iPhone14White256, iPhone14Red256,
       iPhone14Blue512, iPhone14Purple512, iPhone14Yellow512,
-      iPhone14Black512, iPhone14White512, iPhone14Red512
+      iPhone14Black512, iPhone14White512, iPhone14Red512,
+      iPhone14Price , iPhone14Price128, iPhone14Price256, 
+      iPhone14Price512, iPhone14Title
     };
   
     try {
@@ -154,7 +163,9 @@ app.post("/signup", async (req, res) => {
       iPhone15Blue256, iPhone15Purple256, iPhone15Yellow256,
       iPhone15Black256, iPhone15White256, iPhone15Red256,
       iPhone15Blue512, iPhone15Purple512, iPhone15Yellow512,
-      iPhone15Black512, iPhone15White512, iPhone15Red512
+      iPhone15Black512, iPhone15White512, iPhone15Red512 ,
+      iPhone15Price , iPhone15Price128, iPhone15Price256, 
+      iPhone15Price512, iPhone15Title
     } = req.body;
   
     const iphone15Data = {
@@ -165,8 +176,11 @@ app.post("/signup", async (req, res) => {
       iPhone15Blue256, iPhone15Purple256, iPhone15Yellow256,
       iPhone15Black256, iPhone15White256, iPhone15Red256,
       iPhone15Blue512, iPhone15Purple512, iPhone15Yellow512,
-      iPhone15Black512, iPhone15White512, iPhone15Red512
-    };
+      iPhone15Black512, iPhone15White512, iPhone15Red512 , 
+      iPhone15Price , iPhone15Price128, iPhone15Price256, 
+      iPhone15Price512, iPhone15Title
+
+      }
   
     try {
       const data = await iPhone15Model.create(iphone15Data);
@@ -207,6 +221,8 @@ app.post("/signup", async (req, res) => {
       iPhone13Black256, iPhone13White256, 
       iPhone13Blue512, iPhone13Purple512, iPhone13Yellow512,
       iPhone13Black512, iPhone13White512, 
+      iPhone13Price  , iPhone13Price128 , iPhone13Price256 , 
+      iPhone13Price512 , iPhone13Title
     } = req.body;
   
     const iphone13Data = {
@@ -218,6 +234,9 @@ app.post("/signup", async (req, res) => {
       iPhone13Black256, iPhone13White256, 
       iPhone13Blue512, iPhone13Purple512, iPhone13Yellow512,
       iPhone13Black512, iPhone13White512, 
+      iPhone13Price  , iPhone13Price128 , iPhone13Price256 , 
+      iPhone13Price512 , iPhone13Title
+     
     };
   
     try {
@@ -261,6 +280,11 @@ app.post("/signup", async (req, res) => {
       iPhone11Black256, iPhone11White256, 
       iPhone11Blue512, iPhone11Purple512, iPhone11Yellow512,
       iPhone11Black512, iPhone11White512, 
+      iPhone11Price, 
+      iPhone11Price128,
+      iPhone11Price256, 
+      iPhone11Price512,
+      iPhone11Title
     } = req.body;
   
     const iphone11Data = {
@@ -272,6 +296,11 @@ app.post("/signup", async (req, res) => {
       iPhone11Black256, iPhone11White256, 
       iPhone11Blue512, iPhone11Purple512, iPhone11Yellow512,
       iPhone11Black512, iPhone11White512, 
+      iPhone11Price, 
+      iPhone11Price128,
+      iPhone11Price256, 
+      iPhone11Price512,
+      iPhone11Title
     };
   
     try {
@@ -312,6 +341,7 @@ app.post("/signup", async (req, res) => {
       iPhone10Black256, iPhone10White256, 
       iPhone10Blue512, iPhone10Purple512, iPhone10Yellow512,
       iPhone10Black512, iPhone10White512, 
+      iPhone10Price , iPhone10Price128 , iPhone10Price256 , iPhone10Price512 , iPhone10Title
     } = req.body;
   
     const iphone10Data = {
@@ -323,19 +353,100 @@ app.post("/signup", async (req, res) => {
       iPhone10Black256, iPhone10White256, 
       iPhone10Blue512, iPhone10Purple512, iPhone10Yellow512,
       iPhone10Black512, iPhone10White512, 
+      iPhone10Price , iPhone10Price128 , iPhone10Price256 , iPhone10Price512 , iPhone10Title
     };
   
     try {
       const data = await iPhone10Model.create(iphone10Data);
       res.send(data);
     } catch (error) {
-      console.error("Error creating iPhone15 record:", error);
+      console.error("Error creating iPhone10 record:", error);
       res.status(500).send("Internal Server Error");
     }
   });
 
 
+// ......................................Phone SE.....................................
 
+app.get("/iphoneSe/:id", async (req, res) => {
+  const { id } = req.params; // Use "id" as the parameter name
+  try {
+    const data = await iPhoneSeModel.findById(id); // Use "id" directly
+    if (data) {
+      res.send(data);
+    } else {
+      res.status(404).send("iPhoneSe not found"); // Handle the case when the data is not found
+    }
+  } catch (error) {
+    console.error("Error retrieving iPhoneSe data:", error);
+    res.status(500).send("Internal server error"); // Handle other errors
+  }
+});
+
+
+app.post("/iphoneSeadd", async (req, res) => {
+  const {
+    iPhoneSe, iPhoneSeBlue, iPhoneSePurple, iPhoneSeYellow,
+    iPhoneSeBlack, iPhoneSeWhite, 
+    iPhoneSeBlue128, iPhoneSePurple128, iPhoneSeYellow128,
+    iPhoneSeBlack128, iPhoneSeWhite128, 
+    iPhoneSeBlue256, iPhoneSePurple256, iPhoneSeYellow256,
+    iPhoneSeBlack256, iPhoneSeWhite256, 
+    iPhoneSeBlue512, iPhoneSePurple512, iPhoneSeYellow512,
+    iPhoneSeBlack512, iPhoneSeWhite512, 
+    iPhoneSePrice  , iPhoneSePrice128 , iPhoneSePrice256 , 
+    iPhoneSePrice512 , iPhoneSeTitle
+  } = req.body;
+
+  const iphoneSeData = {
+    iPhoneSe, iPhoneSeBlue, iPhoneSePurple, iPhoneSeYellow,
+    iPhoneSeBlack, iPhoneSeWhite, 
+    iPhoneSeBlue128, iPhoneSePurple128, iPhoneSeYellow128,
+    iPhoneSeBlack128, iPhoneSeWhite128, 
+    iPhoneSeBlue256, iPhoneSePurple256, iPhoneSeYellow256,
+    iPhoneSeBlack256, iPhoneSeWhite256, 
+    iPhoneSeBlue512, iPhoneSePurple512, iPhoneSeYellow512,
+    iPhoneSeBlack512, iPhoneSeWhite512, 
+    iPhoneSePrice  , iPhoneSePrice128 , iPhoneSePrice256 , 
+    iPhoneSePrice512 , iPhoneSeTitle
+   
+  };
+
+  try {
+    const data = await iPhoneSeModel.create(iphoneSeData);
+    res.send(data);
+  } catch (error) {
+    console.error("Error creating iPhoneSe record:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+// ......................................AirPods.....................................
+
+app.get("/airpods", async (req, res) => {
+  const data = await airPodsModel.find();
+  res.send(data);
+});
+
+
+app.post("/airpodsadd", async (req, res) => {
+  const {
+    name , title , price , image
+  } = req.body;
+
+  const airPodsData = {
+    name , title , price , image
+  };
+
+  try {
+    const data = await airPodsModel.create(airPodsData);
+    res.send(data);
+  } catch (error) {
+    console.error("Error creating airpods record:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 
 app.listen(8080 , async()=>{

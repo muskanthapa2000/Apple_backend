@@ -9,6 +9,7 @@ const {iPhone11Model} = require("./modules/Phone11.module")
 const {iPhone10Model} = require("./modules/Phone10.module")
 const {iPhoneSeModel} = require("./modules/PhoneSe.module")
 const {airPodsModel} = require("./modules/Airpods.module")
+const {watchModel} = require("./modules/Watch.module")
 
 const express = require("express");
 const app = express();
@@ -441,6 +442,32 @@ app.post("/airpodsadd", async (req, res) => {
 
   try {
     const data = await airPodsModel.create(airPodsData);
+    res.send(data);
+  } catch (error) {
+    console.error("Error creating airpods record:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// ......................................Watch.....................................
+
+app.get("/watch", async (req, res) => {
+  const data = await watchModel.find();
+  res.send(data);
+});
+
+
+app.post("/watchadd", async (req, res) => {
+  const {
+    name , title , price , image
+  } = req.body;
+
+  const watchData = {
+    name , title , price , image
+  };
+
+  try {
+    const data = await watchModel.create(watchData);
     res.send(data);
   } catch (error) {
     console.error("Error creating airpods record:", error);

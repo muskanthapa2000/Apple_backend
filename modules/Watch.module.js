@@ -1,13 +1,13 @@
 
 const mongoose = require("mongoose");
 
-const airPodsSchema = mongoose.Schema({
+const watchSchema = mongoose.Schema({
     name : {type : String},
     title : {type : String},
     price : {type : String},
     image : {type : String},
 })
 
-const airPodsModel = mongoose.model("airPods" , airPodsSchema)
+const watchModel = mongoose.model("watches" , watchSchema)
 
-module.exports = {airPodsModel};
+module.exports = {watchModel}

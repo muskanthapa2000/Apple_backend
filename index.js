@@ -10,6 +10,7 @@ const {iPhone10Model} = require("./modules/Phone10.module")
 const {iPhoneSeModel} = require("./modules/PhoneSe.module")
 const {airPodsModel} = require("./modules/Airpods.module")
 const {watchModel} = require("./modules/Watch.module")
+const {addressModel} = require("./modules/Address.module")
 
 const express = require("express");
 const app = express();
@@ -474,6 +475,37 @@ app.post("/watchadd", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
+
+
+// ......................................Address.....................................
+
+app.get("/address", async (req, res) => {
+  const data = await addressModel.find();
+  res.send(data);
+});
+
+
+app.post("/addressadd", async (req, res) => {
+  const {
+    number , code, fname,lname,address,city, country,pin
+  } = req.body;
+
+  const addressData = {
+    number , code, fname,lname,address,city, country,pin
+  };
+
+  try {
+    const data = await addressModel.create(addressData);
+    res.send(data);
+  } catch (error) {
+    console.error("Error creating airpods record:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
 
 
 app.listen(8080 , async()=>{

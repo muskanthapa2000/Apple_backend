@@ -10,6 +10,7 @@ const {iPhone10Model} = require("./modules/Phone10.module")
 const {iPhoneSeModel} = require("./modules/PhoneSe.module")
 const {airPodsModel} = require("./modules/Airpods.module")
 const {watchModel} = require("./modules/Watch.module")
+// const {addressModel} = require("./modules/Address.module")
 const {addressModel} = require("./modules/Address.module")
 
 const express = require("express");
@@ -55,11 +56,7 @@ app.post("/signup", async (req, res) => {
       }
     });
   });
-  // ......................................... to print name................................
-  app.get("/users", async(req,res)=>{
-    const data = await UserModel.find();
-    res.send(data);
-  })
+  
 //...........................................LOGIN.....................................................
 
   app.post("/login", async (req, res) => {
@@ -85,7 +82,12 @@ app.post("/signup", async (req, res) => {
   });
 
   
-  
+// ..................Find all user for the name .........
+
+app.get("/users", async(req,res)=>{
+  const data = await UserModel.find();
+  res.send(data);
+})
 
 
 // .......................GET IPHONE 14 .................................
@@ -337,7 +339,7 @@ app.post("/signup", async (req, res) => {
   });
   
 
-  app.post("/iphone10add", async (req, res) => {
+  app.post(" ", async (req, res) => {
     const {
       iPhone10, iPhone10Blue, iPhone10Purple, iPhone10Yellow,
       iPhone10Black, iPhone10White, 

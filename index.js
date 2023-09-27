@@ -55,7 +55,11 @@ app.post("/signup", async (req, res) => {
       }
     });
   });
-  
+  // ......................................... to print name................................
+  app.get("/users", async(req,res)=>{
+    const data = await UserModel.find();
+    res.send(data);
+  })
 //...........................................LOGIN.....................................................
 
   app.post("/login", async (req, res) => {
